@@ -27,7 +27,7 @@ A simple Node.js and MySQL-based API to manage school data, allowing users to ad
 ### 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/school-management.git
+git clone https://github.com/your-username/School-Management-System-API.git
 cd school-management
 ```
 
