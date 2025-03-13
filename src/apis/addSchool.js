@@ -8,7 +8,7 @@ export async function addSchool(req, res) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    const query = `INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)`;
+    const query = `INSERT INTO SCHOOLS (name, address, latitude, longitude) VALUES (?, ?, ?, ?)`;
 
     db.query(query, [name, address, latitude, longitude], (err, result) => {
       if (err) {
