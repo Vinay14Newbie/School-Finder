@@ -45,7 +45,7 @@ export async function listSchools(req, res) {
         .json({ error: 'Latitude and Longitude are required' });
     }
 
-    const query = `SELECT * FROM schools`;
+    const query = `SELECT * FROM SCHOOLS`;
     db.query(query, (err, results) => {
       if (err) {
         console.error('Error fetching schools:', err.message);
