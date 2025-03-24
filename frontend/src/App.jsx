@@ -1,22 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Card from './Components/card'
+import React from 'react';
+import { AddSchoolForm } from './Components/molecules/AddSchoolForm';
+import { ClosestSchoolList } from './Components/atoms/ClosestSchoolList';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  let obj = {name:'vinay', age:19}
-  let arr = [1, 2, 3]
-
+const App = () => {
   return (
-    <>
-      {/* <Card data={obj}></Card> */}
-      <Card username="Vinay" btnText="Visit here"></Card>
-      <Card username="Dipak" ></Card>
-    </>
-  )
-}
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
+      <h1 className="text-2xl font-bold mb-4">School Finder</h1>
+      <AddSchoolForm />
+      <ClosestSchoolList />
+    </div>
+  );
+};
 
-export default App
+export default App;
