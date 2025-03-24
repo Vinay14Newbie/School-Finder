@@ -16,7 +16,7 @@ export const AddSchoolForm = () => {
 
     const response = await postSchool(
       schoolName,
-      schoolName.display_name,
+      selectedAddress.display_name,
       selectedAddress.lat,
       selectedAddress.lon
     );
@@ -41,7 +41,7 @@ export const AddSchoolForm = () => {
           className="w-full p-2 border border-gray-300 rounded-lg mb-4"
         />
         <AddressSearch
-          placeholder="Search school address..."
+          placeholder="Enter school address..."
           onSelectAddress={setSelectedAddress}
         />
         {selectedAddress && (
@@ -53,7 +53,7 @@ export const AddSchoolForm = () => {
           type="submit"
           className="w-full mt-4 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
         >
-          Submit
+          Add School
         </button>
       </form>
       {message && <p className="mt-2 text-center text-red-500">{message}</p>}
