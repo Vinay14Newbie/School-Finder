@@ -10,7 +10,7 @@ export const AddressSearch = ({ onSelectAddress, placeholder }) => {
     const value = e.target.value;
     setQuery(value);
     const results = await searchAddress(value);
-    setSuggestions(results);
+    setSuggestions(results?.data);
   };
 
   return (
@@ -20,17 +20,20 @@ export const AddressSearch = ({ onSelectAddress, placeholder }) => {
         placeholder={placeholder}
         value={query}
         onChange={handleSearch}
-        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+        className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
       />
-      {suggestions.length > 0 && (
-        <ul className="bg-white border border-gray-200 rounded-lg mt-2">
+      {suggestions?.length > 0 && (
+        <ul className="bg-white border border-gray-300 rounded-lg mt-2 shadow-md max-h-56 overflow-auto">
           {suggestions.map((item) => (
             <li
               key={item.place_id}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => onSelectAddress(item)}
+              className="p-3 hover:bg-blue-50 cursor-pointer transition text-gray-700 border-b last:border-none"
+              onClick={() => {
+                onSelectAddress(item);
+                setQuery(item.display_name);
+              }}
             >
-              {item.display_name}
+              📌 {item.display_name}
             </li>
           ))}
         </ul>

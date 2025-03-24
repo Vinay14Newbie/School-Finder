@@ -37,7 +37,10 @@ function findClosestLocation(target, locations) {
 
 export async function listSchools(req, res) {
   try {
-    const { latitude, longitude } = req.query;
+    const { latitude, longitude, page, limit } = req.query;
+    const pageNumber = parseInt(page, 10);
+    const limitNumber = parseInt(limit, 10);
+    const offset = (pageNumber - 1) * limitNumber;
 
     if (!latitude || !longitude) {
       return res
@@ -45,21 +48,39 @@ export async function listSchools(req, res) {
         .json({ error: 'Latitude and Longitude are required' });
     }
 
-    const query = `SELECT * FROM SCHOOLS`;
-    db.query(query, (err, results) => {
+    //count total schools
+    const countQuery = `SELECT COUNT(*) AS total FROM SCHOOLS`;
+    db.query(countQuery, (err, countResult) => {
       if (err) {
-        console.error('Error fetching schools:', err.message);
+        console.error('Error fetching school count:', err.message);
         return res.status(500).json({ error: err.message });
       }
 
-      const closestSchools = findClosestLocation(
-        { latitude, longitude },
-        results
-      );
+      const totalSchools = countResult[0].total;
+      const totalPages = Math.ceil(totalSchools / limitNumber);
 
-      return res.status(200).json({
-        message: 'Schools fetched successfully...',
-        data: closestSchools
+      // Fetch paginated schools
+      const query = `SELECT * FROM SCHOOLS LIMIT ? OFFSET ?`;
+      db.query(query, [limitNumber, offset], (err, results) => {
+        if (err) {
+          console.error('Error fetching schools:', err.message);
+          return res.status(500).json({ error: err.message });
+        }
+
+        // Find closest schools
+        const closestSchools = findClosestLocation(
+          { latitude, longitude },
+          results
+        );
+
+        return res.status(200).json({
+          message: 'Schools fetched successfully...',
+          page: pageNumber,
+          limit: limitNumber,
+          totalSchools,
+          totalPages,
+          data: closestSchools
+        });
       });
     });
   } catch (error) {

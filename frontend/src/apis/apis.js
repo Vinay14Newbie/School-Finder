@@ -10,21 +10,25 @@ export const searchAddress = async (query) => {
         import.meta.env.VITE_MAP_API_KEY
       }`
     );
-    return response.data;
+    return { data: response?.data, totalPages: response?.data?.totalPages };
   } catch (error) {
     console.error('Error fetching address suggestions:', error);
-    return [];
+    return { data: [], totalPages: 0 };
   }
 };
 
-export const getClosestSchools = async ({ latitude, longitude }) => {
+export const getClosestSchools = async ({
+  latitude,
+  longitude,
+  page = 1,
+  limit = 5
+}) => {
   try {
-    console.log('latitude and longitude: ', latitude, longitude);
     const response = await axios.get(`${BACKEND_URL}/listSchools`, {
-      params: { latitude, longitude }
+      params: { latitude, longitude, page, limit }
     });
 
-    return response?.data?.data;
+    return response?.data;
   } catch (error) {
     console.error('Error fetching closest schools:', error);
     return [];
