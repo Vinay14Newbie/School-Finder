@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { db } from './config/dbConfig.js';
 import { PORT } from './config/serverConfig.js';
 import { addSchool } from './apis/addSchool.js';
@@ -9,6 +10,13 @@ const app = express();
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
+
+const corsOptions = {
+  origin: [
+    'http://localhost:5173' // Local dev
+  ]
+};
+app.use(cors(corsOptions));
 
 app.post('/addSchool', addSchool);
 
