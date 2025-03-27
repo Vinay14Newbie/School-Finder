@@ -7,7 +7,9 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-      <h1 className="text-2xl font-bold mb-4">School Finder</h1>
+      <h1 className="text-3xl font-bold mb-4 lg:mt-6 mt-14">
+        School Mangement App
+      </h1>
       <ClosestSchoolList />
       <button
         onClick={() => setShowModal(true)}

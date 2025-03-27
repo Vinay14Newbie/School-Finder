@@ -56,17 +56,17 @@ export const AddSchoolForm = ({ onClose }) => {
           )}
           <div className="flex justify-between">
             <button
-              type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition"
-            >
-              Add School
-            </button>
-            <button
               type="button"
               onClick={onClose}
               className="bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition"
             >
               Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition"
+            >
+              Add School
             </button>
           </div>
         </form>
