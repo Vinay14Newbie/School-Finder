@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BACKEND_URL = 'http://localhost:3000'; // Update with actual backend URL
+const BACKEND_URL = 'https://school-finder-b73g.onrender.com';
 
 export const searchAddress = async (query) => {
   if (query.length < 3) return [];
