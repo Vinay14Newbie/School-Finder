@@ -11,7 +11,6 @@ export const ClosestSchoolList = () => {
 
   const fetchClosestSchools = async (address, newPage = 1) => {
     setSelectedAddress(address);
-    console.log('selectedAddress ', selectedAddress);
 
     const result = await getClosestSchools({
       latitude: address.lat,
@@ -19,8 +18,6 @@ export const ClosestSchoolList = () => {
       page: newPage,
       limit
     });
-    console.log('results', result);
-    console.log('results', result?.data);
 
     setSchools(result?.data);
     setTotalPages(result?.totalPages);
