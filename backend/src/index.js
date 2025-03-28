@@ -16,8 +16,7 @@ const corsOptions = {
     'https://school-finder-b73g.onrender.com', // Backend
     'https://school-finder-theta.vercel.app/', // Frontend
     'http://localhost:5173' // Local dev
-  ],
-  credentials: true
+  ]
 };
 app.use(cors(corsOptions));
 
